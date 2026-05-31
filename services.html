@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>خدمات موسيقاتي</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f3f3f3, #e9f0ff);
+    margin: 0;
+    transition: 0.3s;
+}
+
+/* ⭐ الشعار */
+.logo{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+/* الحاوية */
+.container {
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #222;
+}
+
+/* ⭐ الجملة */
+.center-text{
+    text-align:center;
+    font-family:'Tajawal', Arial;
+    font-size:26px;
+    color:#4b0082;
+    margin:10px auto 20px;
+    padding:15px;
+    width:90%;
+    max-width:500px;
+    background:rgba(255,255,255,0.8);
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3d8b40;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+
+.back {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.back button {
+    background: #333;
+}
+
+.back button:hover {
+    background: #555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="index.html">
+    <img src="images/logo.png" class="logo">
+</a>
+
+<div class="container">
+
+<h1 id="title">🛠️ مركز صيانة موسيقاتي</h1>
+
+<div class="center-text" id="desc">
+عندك مشكلة بآلتك؟ 🎵  
+بدك دوزنة او تصليح او فحص؟  
+فريقنا جاهز يخدمك بسرعة واحتراف ✨
+</div>
+
+<input type="text" id="name" placeholder="الاسم الكامل">
+<input type="text" id="phone" placeholder="رقم الهاتف">
+<textarea id="problem" placeholder="اكتب المشكلة"></textarea>
+
+<button onclick="sendRequest()" id="sendBtn">إرسال الطلب</button>
+
+<div class="message" id="message"></div>
+
+<div class="back">
+<button onclick="window.location.href='index.html'" id="backBtn">⬅ العودة للرئيسية</button>
+</div>
+
+</div>
+
+<!-- 🎧 الأصوات -->
+<audio id="successSound">
+    <source src="images/snd_succsess.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="errorSound">
+    <source src="images/snd_error.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🎵 الموسيقى الخلفية -->
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* ========= الإرسال ========= */
+function sendRequest() {
+
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let problem = document.getElementById("problem").value;
+    let message = document.getElementById("message");
+    let box = document.querySelector(".container");
+
+    let successSound = document.getElementById("successSound");
+    let errorSound = document.getElementById("errorSound");
+
+    let lang = localStorage.getItem("lang") || "ar";
+
+    const t = {
+        ar:{
+            empty:"⚠️ الرجاء تعبئة جميع الحقول",
+            success:"✅ تم إرسال الطلب بنجاح"
+        },
+        en:{
+            empty:"⚠️ Please fill all fields",
+            success:"✅ Request sent successfully"
+        }
+    };
+
+    if (name === "" || phone === "" || problem === "") {
+
+        errorSound.currentTime = 0;
+        errorSound.play().catch(()=>{});
+
+        message.style.color = "red";
+        message.innerText = t[lang].empty;
+
+        if (navigator.vibrate) navigator.vibrate(300);
+
+        box.classList.add("shake");
+        setTimeout(() => box.classList.remove("shake"), 400);
+
+    } else {
+
+        successSound.currentTime = 0;
+        successSound.play().catch(()=>{});
+
+        message.style.color = "green";
+        message.innerText = t[lang].success;
+
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("problem").value = "";
+    }
+}
+
+
+/* ========= اللغة + الثيم ========= */
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+ar:{
+title:"🛠️ مركز صيانة موسيقاتي",
+desc:"عندك مشكلة بآلتك؟ 🎵 بدك دوزنة او تصليح او فحص؟ فريقنا جاهز يخدمك بسرعة واحتراف ✨",
+name:"الاسم الكامل",
+phone:"رقم الهاتف",
+problem:"اكتب المشكلة",
+send:"إرسال الطلب",
+back:"⬅ العودة للرئيسية"
+},
+
+en:{
+title:"🛠️ Mosiqati Maintenance Center",
+desc:"Got a problem with your instrument? 🎵 Need tuning, repair or inspection? Our team is ready to help you fast and professionally ✨",
+name:"Full Name",
+phone:"Phone Number",
+problem:"Describe the problem",
+send:"Send Request",
+back:"⬅ Back to Home"
+}
+};
+
+document.getElementById("title").innerText = t[lang].title;
+document.getElementById("desc").innerText = t[lang].desc;
+
+document.getElementById("name").placeholder = t[lang].name;
+document.getElementById("phone").placeholder = t[lang].phone;
+document.getElementById("problem").placeholder = t[lang].problem;
+
+document.getElementById("sendBtn").innerText = t[lang].send;
+document.getElementById("backBtn").innerText = t[lang].back;
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+if(theme === "dark"){
+document.body.style.background = "#111";
+document.body.style.color = "white";
+document.querySelector(".container").style.background = "#222";
+}
+
+}
+
+applySettings();
+
+/* 🎵 تشغيل الموسيقى */
+
+const music = document.getElementById("bgMusic");
+
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    music.play().catch(()=>{});
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>موسيقاتي</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#f5f5f5,#e8e0ff);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+transition:0.3s;
+position:relative;
+}
+
+/* الشعار */
+.logo{
+width:170px;
+height:170px;
+object-fit:cover;
+border-radius:50%;
+position:absolute;
+top:20px;
+left:20px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* الصندوق */
+.box{
+background:white;
+width:90%;
+max-width:750px;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+
+h1{
+color:#4b0082;
+margin-bottom:15px;
+}
+
+p{
+font-size:18px;
+line-height:1.9;
+color:#333;
+transition:0.3s;
+text-align: justify;
+}
+
+.rate-title{
+margin-top:25px;
+font-size:20px;
+color:#4b0082;
+font-weight:bold;
+}
+
+select{
+width:100%;
+padding:12px;
+font-size:18px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
+}
+
+button{
+width:100%;
+margin-top:15px;
+padding:12px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#4b0082;
+color:white;
+transition:0.3s;
+}
+
+button:hover{
+background:gold;
+color:black;
+}
+
+.back button{
+background:#333;
+}
+
+.back button:hover{
+background:#555;
+}
+
+/* الجدول */
+table{
+width:100%;
+margin-top:25px;
+border-collapse:collapse;
+}
+
+table th, table td{
+border:1px solid #ddd;
+padding:10px;
+font-size:16px;
+}
+
+table th{
+background:#4b0082;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<img src="images/logo.png" class="logo">
+
+<div class="box">
+
+<h1 id="title">🎵 موسيقاتي</h1>
+
+<p id="desc">
+اهلا وسهلا بكم بمتجر موسيقاتي 🎹🎻 احنا مش مجرد متجر احنا عيلتكم الموسيقية الاولى بالاردن هدفنا نكون مكانكم المفضل اللي بتلاقوا فيه كل الالات الموسيقية والاكسسوارات اللي بتحلموا فيها بجودة عالية واسعار بتناسب الكل.
+<br><br>
+ولاننا معكم خطوة بخطوة ما بوقف شغلنا بس عند البيع بنقدملكم افضل كورسات التدريب مع اساتذة محترفين لتتعلموا العزف من الصفر وكمان بنهتم بالآلتكم وبنرجعلكم اياها جديدة مع قسم الصيانة المتخصص عندنا وين ما كنتم بالاردن موسيفاتي دايما بخدمتكم ✨
+</p>
+
+<div class="rate-title" id="rateTitle">⭐ قيم متجرنا</div>
+
+<select id="rate">
+<option>⭐</option>
+<option>⭐⭐</option>
+<option>⭐⭐⭐</option>
+<option>⭐⭐⭐⭐</option>
+<option>⭐⭐⭐⭐⭐</option>
+</select>
+
+<button onclick="thanks()" id="sendBtn">ارسال التقييم</button>
+
+<table>
+<tr>
+<th id="th1">الخدمة</th>
+<th id="th2">الوصف</th>
+<th id="th3">السعر</th>
+</tr>
+
+<tr>
+<td id="td1">تصليح الات</td>
+<td id="td2">صيانة سريعة للالات الموسيقية</td>
+<td id="td3">10 - 25 دينار</td>
+</tr>
+
+<tr>
+<td id="td4">تبديل اوتار</td>
+<td id="td5">استبدال اوتار الجيتار</td>
+<td id="td6">5 - 10 دينار</td>
+</tr>
+
+<tr>
+<td id="td7">تنظيف الات</td>
+<td id="td8">تنظيف احترافي للالات</td>
+<td id="td9">8 دينار</td>
+</tr>
+</table>
+
+<div class="back">
+<button onclick="window.location.href='index.html'" id="backBtn">
+⬅ العودة للرئيسية
+</button>
+</div>
+
+</div>
+
+<audio id="thankSound">
+<source src="images/snd_succsess.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgMusic" loop>
+<source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+ar:{
+title:"🎵 موسيقاتي",
+desc:`اهلا وسهلا بكم بمتجر موسيقاتي 🎹🎻 احنا مش مجرد متجر احنا عيلتكم الموسيقية الاولى بالاردن هدفنا نكون مكانكم المفضل اللي بتلاقوا فيه كل الالات الموسيقية والاكسسوارات اللي بتحلموا فيها بجودة عالية واسعار بتناسب الكل.
+<br><br>
+ولاننا معكم خطوة بخطوة ما بوقف شغلنا بس عند البيع بنقدملكم افضل كورسات التدريب مع اساتذة محترفين لتتعلموا العزف من الصفر وكمان بنهتم بالآلتكم وبنرجعلكم اياها جديدة مع قسم الصيانة المتخصص عندنا وين ما كنتم بالاردن موسيفاتي دايما بخدمتكم ✨`,
+rate:"⭐ قيم متجرنا",
+send:"ارسال التقييم",
+back:"⬅ العودة للرئيسية",
+alert:"شكرا لتقييمك ❤️",
+
+table1:"الخدمة",
+table2:"الوصف",
+table3:"السعر",
+
+r1:"تصليح الات",
+r2:"صيانة سريعة للالات الموسيقية",
+r3:"10 - 25 دينار",
+
+r4:"تبديل اوتار",
+r5:"استبدال اوتار الجيتار",
+r6:"5 - 10 دينار",
+
+r7:"تنظيف الات",
+r8:"تنظيف احترافي للالات",
+r9:"8 دينار"
+},
+
+en:{
+title:"🎵 Mosiqati",
+desc:`Welcome to Mosiqati 🎹🎻 We are not just a store, but your first musical family in Jordan. Our goal is to be your favorite place where you find all musical instruments and accessories with high quality and affordable prices.
+<br><br>
+We also offer professional courses with expert teachers so you can learn from scratch, and instrument maintenance services to keep your instruments like new. Wherever you are in Jordan, Mosiqati is always here for you ✨`,
+rate:"⭐ Rate Our Store",
+send:"Submit Rating",
+back:"⬅ Back to Home",
+alert:"Thanks for your rating ❤️",
+
+table1:"Service",
+table2:"Description",
+table3:"Price",
+
+r1:"Instrument Repair",
+r2:"Fast maintenance for instruments",
+r3:"10 - 25 JOD",
+
+r4:"String Replacement",
+r5:"Replacing guitar strings",
+r6:"5 - 10 JOD",
+
+r7:"Instrument Cleaning",
+r8:"Professional instrument cleaning",
+r9:"8 JOD"
+}
+};
+
+document.getElementById("title").innerText = t[lang].title;
+document.getElementById("desc").innerHTML = t[lang].desc;
+document.getElementById("rateTitle").innerText = t[lang].rate;
+document.getElementById("sendBtn").innerText = t[lang].send;
+document.getElementById("backBtn").innerText = t[lang].back;
+
+document.getElementById("th1").innerText = t[lang].table1;
+document.getElementById("th2").innerText = t[lang].table2;
+document.getElementById("th3").innerText = t[lang].table3;
+
+document.getElementById("td1").innerText = t[lang].r1;
+document.getElementById("td2").innerText = t[lang].r2;
+document.getElementById("td3").innerText = t[lang].r3;
+
+document.getElementById("td4").innerText = t[lang].r4;
+document.getElementById("td5").innerText = t[lang].r5;
+document.getElementById("td6").innerText = t[lang].r6;
+
+document.getElementById("td7").innerText = t[lang].r7;
+document.getElementById("td8").innerText = t[lang].r8;
+document.getElementById("td9").innerText = t[lang].r9;
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+if(theme === "dark"){
+document.body.style.background = "#111";
+document.body.style.color = "white";
+document.querySelector(".box").style.background = "#222";
+document.querySelector("p").style.color = "white";
+}
+}
+
+applySettings();
+
+function toggleLang(){
+let current = localStorage.getItem("lang") || "ar";
+let newLang = (current === "ar") ? "en" : "ar";
+localStorage.setItem("lang", newLang);
+applySettings();
+}
+
+function thanks(){
+let sound = document.getElementById("thankSound");
+sound.currentTime = 0;
+sound.play().catch(()=>{});
+
+let lang = localStorage.getItem("lang") || "ar";
+
+if(lang === "ar"){
+alert("شكرا لتقييمك ❤️");
+}else{
+alert("Thanks for your rating ❤️");
+}
+}
+
+const music = document.getElementById("bgMusic");
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+music.play().catch(()=>{});
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<title>مضخم الغيتار</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+transition:0.3s;
+background:#f5f5f5;
+font-family:Tajawal, Arial;
+margin:0;
+}
+
+/* الهيدر */
+header{
+text-align:center;
+background:#4b0082;
+color:white;
+padding:20px;
+transition:0.3s;
+position:relative;
+}
+
+/* الشعار */
+.logo{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:50%;
+position:absolute;
+left:20px;
+top:5px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* العنوان */
+.category-title{
+text-align:center;
+font-size:35px;
+margin-top:25px;
+color:#4b0082;
+font-weight:bold;
+letter-spacing:1px;
+text-shadow:2px 2px 8px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+/* المنتجات */
+.products{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+}
+
+.product{
+background:white;
+width:260px;
+padding:15px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+
+.product:hover{
+transform:scale(1.03);
+}
+
+.product img{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.product p{
+font-size:20px;
+font-weight:bold;
+color:green;
+}
+
+/* زر الرجوع */
+.back{
+text-align:center;
+margin:20px;
+}
+
+.back button{
+background:#333;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.back button:hover{
+background:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<!-- الشعار -->
+<img src="images/logo.png" class="logo">
+
+<h1 id="title">🔊 مضخم صوت الغيتار 🔊</h1>
+
+</header>
+
+<div class="category-title" id="catTitle">
+أنواع مضخمات الصوت المتوفرة 🔊
+</div>
+
+<div class="products">
+
+<div class="product">
+<img src="images/11.png">
+<h2 id="p1">مضخم Cort CM20B BASS</h2>
+<p>135 دينار</p>
+</div>
+
+<div class="product">
+<img src="images/8.png">
+<h2 id="p2">مضخم Cort CM15-R Combo</h2>
+<p>135 دينار</p>
+</div>
+
+<div class="product">
+<img src="images/10.png">
+<h2 id="p3">مضخم Fender FRONTMAN</h2>
+<p>120 دينار</p>
+</div>
+
+<div class="product">
+<img src="images/9.png">
+<h2 id="p4">مضخم Cort CM30R Combo</h2>
+<p>150 دينار</p>
+</div>
+
+</div>
+
+<div class="back">
+<button class="backBtn" onclick="window.location.href='index.html'">
+⬅ العودة للرئيسية
+</button>
+</div>
+
+<script>
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+
+ar: {
+title: "🔊 مضخم صوت الغيتار 🔊",
+cat: "أنواع مضخمات الصوت المتوفرة 🔊",
+p1: "مضخم Cort CM20B BASS",
+p2: "مضخم Cort CM15-R Combo",
+p3: "مضخم Fender FRONTMAN",
+p4: "مضخم Cort CM30R Combo",
+back: "⬅ العودة للرئيسية"
+},
+
+en: {
+title: "🔊 Gramophone Section 🔊",
+cat: "Available Gramophone 🔊",
+p1: "Cort CM20B BASS Gramophone",
+p2: "Cort CM15-R Combo Gramophone",
+p3: "Fender FRONTMAN Gramophone",
+p4: "Cort CM30R Combo Gramophone",
+back: "⬅ Back to Home"
+}
+
+};
+
+document.getElementById("title").innerText = t[lang].title;
+document.getElementById("catTitle").innerText = t[lang].cat;
+document.getElementById("p1").innerText = t[lang].p1;
+document.getElementById("p2").innerText = t[lang].p2;
+document.getElementById("p3").innerText = t[lang].p3;
+document.getElementById("p4").innerText = t[lang].p4;
+document.querySelector(".backBtn").innerText = t[lang].back;
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+if(theme === "dark"){
+
+document.body.style.background = "#111";
+document.body.style.color = "white";
+
+document.querySelectorAll(".product").forEach(el=>{
+el.style.background = "#222";
+el.style.color = "white";
+});
+
+document.querySelector("header").style.background = "#222";
+
+document.querySelector(".category-title").style.color = "white";
+
+}else{
+
+document.body.style.background = "#f5f5f5";
+document.body.style.color = "black";
+
+document.querySelectorAll(".product").forEach(el=>{
+el.style.background = "white";
+el.style.color = "black";
+});
+
+document.querySelector("header").style.background = "#4b0082";
+
+document.querySelector(".category-title").style.color = "#4b0082";
+}
+
+}
+
+applySettings();
+
+</script>
+
+</script>
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+<script>
+
+const music = document.getElementById("bgMusic");
+
+/* تشغيل حسب الإعدادات */
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    music.play().catch(()=>{});
+}
+
+</script>
+
+</body>
+</html>
+

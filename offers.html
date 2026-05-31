@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>العروضات</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#f5f5f5,#e9e0ff);
+transition:0.3s;
+}
+
+/* ⭐ الشعار بكل الصفحات */
+.site-logo{
+    position: fixed;
+    top: 0px;
+    left: 10px;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 9999;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* HEADER */
+header{
+background:#4b0082;
+color:white;
+text-align:center;
+padding:25px;
+font-size:28px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+padding:20px;
+}
+
+.offer{
+display:flex;
+align-items:center;
+gap:20px;
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:18px;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.offer img{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.offer-text h2{
+color:#4b0082;
+margin:0 0 10px 0;
+}
+
+.price{
+color:green;
+font-weight:bold;
+}
+
+.old{
+color:red;
+text-decoration:line-through;
+}
+
+.badge{
+background:gold;
+padding:5px 10px;
+border-radius:10px;
+font-weight:bold;
+display:inline-block;
+margin-top:5px;
+}
+
+.back{
+text-align:center;
+margin:30px;
+}
+
+.back button{
+background:#333;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ⭐ الشعار -->
+<img src="images/logo.png" class="site-logo">
+
+<header id="title">🔥 العروضات 🔥</header>
+
+<div class="container">
+
+<div class="offer">
+<img src="images/20.png">
+
+<div class="offer-text">
+<h2 id="offer1_title">بكج الخمس قطع 🥁 | العرض الأقوى!</h2>
+<p class="old" id="oldPrice">السعر السابق: 950 دينار ❌</p>
+<p class="price" id="newPrice">السعر الحالي: 800 دينار 💰</p>
+<span class="badge">SPECIAL DISCOUNT 🔥</span>
+<p id="offer1_desc">⚠️ العرض ساري حتى نفاد الكمية، احجز قطعتك الآن! 📥👇</p>
+</div>
+</div>
+
+<div class="offer">
+<img src="images/28.png">
+
+<div class="offer-text">
+<h2 id="offer2_title">عرض الهدية الكبرى 🎁🎹</h2>
+<p id="offer2_desc">اشتري قيتار ⬅️ واحصل على مضخم صوت مجاناً! 🔊🆓</p>
+<p class="price">750 دينار فقط! ✨💰🔥</p>
+</div>
+</div>
+
+<!-- 🎬 الفيديو -->
+<div style="text-align:center; margin-top:30px;">
+    <h2 style="color:#4b0082;">🎬فيديو عن 111 نوع من الالات الموسيقية </h2>
+
+    <img 
+        src="https://img.youtube.com/vi/qOvPWvJaMuc/hqdefault.jpg"
+        style="width:100%; height:350px; object-fit:cover; cursor:pointer; border-radius:10px;"
+        onclick="this.style.display='none'; document.getElementById('video').style.display='block';">
+
+    <iframe 
+        id="video"
+        width="100%" 
+        height="350"
+        src="https://www.youtube.com/embed/qOvPWvJaMuc"
+        title="Offers Video"
+        frameborder="0"
+        style="display:none;"
+        allowfullscreen>
+    </iframe>
+</div>
+
+</div>
+
+<div class="back">
+<button onclick="window.location.href='index.html'" id="backBtn">
+⬅ العودة للرئيسية
+</button>
+</div>
+
+<!-- 🎵 الموسيقى (إضافة مثل باقي الصفحات) -->
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+/* تشغيل حسب الإعدادات مثل باقي الموقع */
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    music.play().catch(()=>{});
+}
+</script>
+
+<script>
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+ar:{
+title:"🔥 العروضات 🔥",
+offer1:"بكج الخمس قطع 🥁 | العرض الأقوى!",
+old:"السعر السابق: 950 دينار ❌",
+new:"السعر الحالي: 800 دينار 💰",
+offer1_desc:"⚠️ العرض ساري حتى نفاد الكمية، احجز قطعتك الآن! 📥👇",
+offer2:"عرض الهدية الكبرى 🎁🎹",
+offer2_desc:"اشتري قيتار ⬅️ واحصل على مضخم صوت مجاناً! 🔊🆓",
+back:"⬅ العودة للرئيسية"
+},
+en:{
+title:"🔥 Offers 🔥",
+offer1:"5-Piece Bundle 🥁 | Best Deal!",
+old:"Old price: 950 JOD ❌",
+new:"New price: 800 JOD 💰",
+offer1_desc:"⚠️ Limited offer, grab yours now! 📥👇",
+offer2:"Big Gift Offer 🎁🎹",
+offer2_desc:"Buy a guitar and get a free amplifier! 🔊🆓",
+back:"⬅ Back to Home"
+}
+};
+
+document.getElementById("title").innerText = t[lang].title;
+document.getElementById("offer1_title").innerText = t[lang].offer1;
+document.getElementById("oldPrice").innerText = t[lang].old;
+document.getElementById("newPrice").innerText = t[lang].new;
+document.getElementById("offer1_desc").innerText = t[lang].offer1_desc;
+document.getElementById("offer2_title").innerText = t[lang].offer2;
+document.getElementById("offer2_desc").innerText = t[lang].offer2_desc;
+document.getElementById("backBtn").innerText = t[lang].back;
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+if(theme === "dark"){
+document.body.style.background = "#111";
+document.body.style.color = "white";
+
+document.querySelectorAll(".offer").forEach(el=>{
+el.style.background = "#222";
+el.style.color = "white";
+});
+
+document.querySelector("header").style.background = "#222";
+
+}else{
+document.body.style.background = "linear-gradient(135deg,#f5f5f5,#e9e0ff)";
+document.body.style.color = "black";
+
+document.querySelectorAll(".offer").forEach(el=>{
+el.style.background = "white";
+el.style.color = "black";
+});
+
+document.querySelector("header").style.background = "#4b0082";
+}
+}
+
+applySettings();
+
+</script>
+
+</body>
+</html>

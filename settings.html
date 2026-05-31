@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>الإعدادات</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+transition:0.3s;
+}
+
+/* ⭐ الشعار */
+.logo{
+position: fixed;
+top: 10px;
+left: 10px;
+width: 200px;
+height: 200px;
+object-fit: cover;
+border-radius: 50%;
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+z-index: 999;
+cursor:pointer;
+}
+
+.container{
+max-width:500px;
+margin:90px auto 50px;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+h1{
+color:#4b0082;
+}
+
+select, button{
+width:100%;
+padding:12px;
+margin-top:15px;
+font-size:18px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+background:#4b0082;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:gold;
+color:black;
+}
+
+.backBtn{
+background:#333;
+color:white;
+margin-top:15px;
+}
+
+.backBtn:hover{
+background:#555;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="index.html">
+    <img src="images/logo.png" class="logo">
+</a>
+
+<div class="container">
+
+<h1 id="title">⚙️ الإعدادات</h1>
+
+<label id="langLabel">🌐 اللغة</label>
+<select id="language">
+<option value="ar">العربية</option>
+<option value="en">English</option>
+</select>
+
+<label id="themeLabel">🎨 الثيم</label>
+<select id="theme">
+<option value="light">فاتح</option>
+<option value="dark">داكن</option>
+</select>
+
+<!-- ⭐ الموسيقى تحت الثيم مباشرة -->
+<label>🎵 الموسيقى</label>
+<select id="music">
+<option value="on">تشغيل</option>
+<option value="off">إيقاف</option>
+</select>
+
+<button onclick="saveSettings()" id="saveBtn">حفظ</button>
+
+<button class="backBtn" onclick="window.location.href='index.html'" id="backBtn">
+⬅ العودة للرئيسية
+</button>
+
+</div>
+
+<!-- 🎧 الصوت -->
+<audio id="saveSound">
+    <source src="images/snd_succsess.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function saveSettings(){
+
+let lang = document.getElementById("language").value;
+let theme = document.getElementById("theme").value;
+let music = document.getElementById("music").value;
+
+
+localStorage.setItem("lang", lang);
+localStorage.setItem("theme", theme);
+localStorage.setItem("music", music);
+
+/* 🎧 صوت الحفظ */
+let sound = document.getElementById("saveSound");
+sound.currentTime = 0;
+sound.play().catch(()=>{});
+
+alert("تم حفظ الإعدادات ✅");
+
+applySettings();
+}
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+let music = localStorage.getItem("music") || "on";
+
+document.getElementById("music").value = music;
+
+/* اللغة */
+if(lang === "en"){
+document.documentElement.lang = "en";
+document.documentElement.dir = "ltr";
+}else{
+document.documentElement.lang = "ar";
+document.documentElement.dir = "rtl";
+}
+
+/* الثيم */
+if(theme === "dark"){
+document.body.style.background = "#111";
+document.body.style.color = "white";
+document.querySelector(".container").style.background = "#222";
+}else{
+document.body.style.background = "#f5f5f5";
+document.body.style.color = "black";
+document.querySelector(".container").style.background = "white";
+}
+
+}
+
+applySettings();
+
+</script>
+
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+let musicState = localStorage.getItem("music") || "on";
+
+/* إذا تشغيل */
+if(musicState === "on"){
+    document.addEventListener("click", function startMusic(){
+        music.play().catch(()=>{});
+    }, { once:true });
+}
+</script>
+
+</body>
+</html>

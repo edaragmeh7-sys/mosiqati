@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<title>البيانو</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- خط عربي فخم -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+transition:0.3s;
+background:#f5f5f5;
+font-family:Tajawal, Arial;
+position:relative;
+}
+
+/* الشعار */
+
+.logo{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:50%;
+position:absolute;
+top:5px;
+left:20px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* الهيدر */
+
+header{
+text-align:center;
+background:#4b0082;
+color:white;
+padding:20px;
+transition:0.3s;
+}
+
+/* عنوان الصفحة */
+
+.category-title{
+text-align:center;
+font-size:35px;
+margin-top:25px;
+color:#4b0082;
+font-weight:bold;
+letter-spacing:1px;
+text-shadow:2px 2px 8px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+/* المنتجات */
+
+.types{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+}
+
+/* المنتج */
+
+.product{
+background:white;
+width:260px;
+padding:15px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+
+.product:hover{
+transform:scale(1.03);
+}
+
+.product img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.product h2{
+font-size:22px;
+margin-top:10px;
+}
+
+.product p{
+font-size:20px;
+font-weight:bold;
+color:green;
+}
+
+/* زر الرجوع */
+
+.back{
+text-align:center;
+margin:20px;
+}
+
+.back button{
+background:#333;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.back button:hover{
+background:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- الشعار -->
+
+<img src="images/logo.png" class="logo">
+
+<header>
+
+<h1 id="title">🎹 قسم البيانو 🎹</h1>
+
+</header>
+
+<div class="category-title" id="catTitle">
+
+أنواع البيانو المتوفرة 🎵
+
+</div>
+
+<div class="types">
+
+<!-- النوع 1 -->
+
+<div class="product">
+
+<img src="images/2.png">
+
+<h2 id="p1">بيانو كاسيو</h2>
+
+<p>494 دينار</p>
+
+</div>
+
+<!-- النوع 2 -->
+
+<div class="product">
+
+<img src="images/1.png">
+
+<h2 id="p2">بيانو كاسيو ابيض - AP 270</h2>
+
+<p>750 دينار</p>
+
+</div>
+
+<!-- النوع 3 -->
+
+<div class="product">
+
+<img src="images/3.png">
+
+<h2 id="p3">اورغ كاسيو CT-S400</h2>
+
+<p>200 دينار</p>
+
+</div>
+
+</div>
+
+<!-- زر رجوع -->
+
+<div class="back">
+
+<button class="backBtn" onclick="window.location.href='index.html'">
+
+⬅ العودة للرئيسية
+
+</button>
+
+</div>
+
+<!-- ⚙️ نظام الإعدادات -->
+
+<script>
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+
+let theme = localStorage.getItem("theme") || "light";
+
+/* 🌍 الترجمة */
+
+const t = {
+
+ar: {
+title: "🎹 قسم البيانو 🎹",
+cat: "أنواع البيانو المتوفرة 🎵",
+p1: "بيانو كاسيو",
+p2: "بيانو كاسيو ابيض - AP 270",
+p3: "اورغ كاسيو CT-S400",
+back: "⬅ العودة للرئيسية"
+},
+
+en: {
+title: "🎹 Piano Section 🎹",
+cat: "Available Piano Types 🎵",
+p1: "Casio Piano",
+p2: "White Casio Piano - AP 270",
+p3: "Casio Organ CT-S400",
+back: "⬅ Back to Home"
+}
+
+};
+
+/* النصوص */
+
+document.getElementById("title").innerText = t[lang].title;
+
+document.getElementById("catTitle").innerText = t[lang].cat;
+
+document.getElementById("p1").innerText = t[lang].p1;
+
+document.getElementById("p2").innerText = t[lang].p2;
+
+document.getElementById("p3").innerText = t[lang].p3;
+
+document.querySelector(".backBtn").innerText = t[lang].back;
+
+/* اللغة */
+
+document.documentElement.lang = lang;
+
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+/* الثيم */
+
+if(theme === "dark"){
+
+document.body.style.background = "#111";
+
+document.body.style.color = "white";
+
+document.querySelectorAll(".product").forEach(el=>{
+el.style.background = "#222";
+el.style.color = "white";
+});
+
+document.querySelector("header").style.background = "#222";
+
+document.querySelector(".category-title").style.color = "white";
+
+}else{
+
+document.body.style.background = "#f5f5f5";
+
+document.body.style.color = "black";
+
+document.querySelectorAll(".product").forEach(el=>{
+el.style.background = "white";
+el.style.color = "black";
+});
+
+document.querySelector("header").style.background = "#4b0082";
+
+document.querySelector(".category-title").style.color = "#4b0082";
+}
+
+}
+
+applySettings();
+
+</script>
+
+</script>
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+<script>
+
+const music = document.getElementById("bgMusic");
+
+/* تشغيل حسب الإعدادات */
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    music.play().catch(()=>{});
+}
+
+</script>
+
+</body>
+
+</html>
