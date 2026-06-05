@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تواصل معنا</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+transition:0.3s;
+}
+
+
+.logo{
+position: fixed;
+top: 10px;
+left: 10px;
+width: 150px;
+height: 150px;
+object-fit: cover;
+border-radius: 50%;
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+z-index: 999;
+}
+
+
+header{
+background:#4b0082;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+
+.contact-box{
+background:white;
+width:90%;
+max-width:800px;
+margin:30px auto;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
+text-align:center;
+transition:0.3s;
+}
+
+
+.contact-box a{
+color:#4b0082;
+font-weight:bold;
+text-decoration:none;
+font-size:20px;
+}
+
+
+.whatsapp button{
+background:#25D366;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+font-size:18px;
+}
+
+
+.back button{
+background:#333;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:10px;
+cursor:pointer;
+font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<a href="index.html">
+    <img src="images/logo.png" class="logo">
+</a>
+
+<header>
+<h1 id="title">📞 تواصل معنا</h1>
+<p id="subtitle">يسعدنا تواصلكم معنا 🎵</p>
+</header>
+
+<div class="contact-box">
+
+<h2 id="phoneTitle">📞 رقم الهاتف</h2>
+<p><a href="tel:0780604466" dir="ltr">07 8060 4466</a></p>
+
+<h2 id="emailTitle">📧 البريد الالكتروني</h2>
+<p><a href="mailto:mosiqati@gmail.com">mosiqati@gmail.com</a></p>
+
+<h2 id="locationTitle">📍 موقع المتجر</h2>
+<p id="locationText">الجبيهة - مقابل بنك الأردن</p>
+
+<div class="whatsapp" style="margin-top:15px;">
+<a href="https://wa.me/962780604466" target="_blank">
+<button id="waBtn">💬 تواصل واتساب</button>
+</a>
+</div>
+
+<div style="margin-top:20px;">
+<a href="#">Instagram</a> |
+<a href="#">Facebook</a>
+</div>
+
+<h2 id="mapTitle" style="color:#4b0082;margin-top:25px;">
+📍 موقعنا على الخريطة
+</h2>
+
+<iframe
+src="https://www.google.com/maps?q=Bank+of+Jordan+Jubeiha+Amman&output=embed"
+width="100%" height="300" style="border:0;border-radius:20px;">
+</iframe>
+
+</div>
+
+<div class="back" style="text-align:center;margin:20px;">
+<button onclick="window.location.href='index.html'" id="backBtn">
+⬅ العودة للرئيسية
+</button>
+</div>
+
+<script>
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+ar:{
+title:"📞 تواصل معنا",
+subtitle:"يسعدنا تواصلكم معنا 🎵",
+phone:"📞 رقم الهاتف",
+email:"📧 البريد الالكتروني",
+location:"📍 موقع المتجر",
+locationText:"الجبيهة - مقابل بنك الأردن",
+wa:"💬 تواصل واتساب",
+map:"📍 موقعنا على الخريطة",
+back:"⬅ العودة للرئيسية"
+},
+en:{
+title:"📞 Contact Us",
+subtitle:"We are happy to hear from you 🎵",
+phone:"📞 Phone Number",
+email:"📧 Email",
+location:"📍 Store Location",
+locationText:"Jubeiha - Opposite Bank of Jordan",
+wa:"💬 Contact WhatsApp",
+map:"📍 Our Location on Map",
+back:"⬅ Back to Home"
+}
+};
+
+document.getElementById("title").innerText = t[lang].title;
+document.getElementById("subtitle").innerText = t[lang].subtitle;
+document.getElementById("phoneTitle").innerText = t[lang].phone;
+document.getElementById("emailTitle").innerText = t[lang].email;
+document.getElementById("locationTitle").innerText = t[lang].location;
+document.getElementById("locationText").innerText = t[lang].locationText;
+document.getElementById("waBtn").innerText = t[lang].wa;
+document.getElementById("mapTitle").innerText = t[lang].map;
+document.getElementById("backBtn").innerText = t[lang].back;
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+if(theme === "dark"){
+document.body.style.background = "#111";
+document.body.style.color = "white";
+document.querySelector(".contact-box").style.background = "#222";
+}else{
+document.body.style.background = "#f5f5f5";
+document.querySelector(".contact-box").style.background = "white";
+document.body.style.color = "black";
+}
+}
+
+applySettings();
+</script>
+
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const music = document.getElementById("bgMusic");
+
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    music.play().catch(()=>{});
+}
+
+</script>
+
+</body>
+</html>
