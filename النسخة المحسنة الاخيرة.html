@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>موسيقاتي</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+transition:0.3s;
+}
+
+
+header{
+background:#4b0082;
+color:white;
+text-align:center;
+padding:40px;
+position:relative;
+}
+
+
+.logo{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:50%;
+position:absolute;
+left:30px;
+top:20px;
+}
+
+
+.menu{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+}
+
+.menu-item{
+background:white;
+padding:15px;
+width:140px;
+border-radius:18px;
+text-align:center;
+text-decoration:none;
+color:black;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.menu-item:hover{
+transform:translateY(-5px);
+}
+
+.menu-item img{
+width:70px;
+height:70px;
+object-fit:cover;
+margin-bottom:10px;
+}
+
+.menu-item span{
+display:block;
+font-weight:bold;
+}
+
+
+.title{
+text-align:center;
+color:#4b0082;
+margin-top:20px;
+}
+
+.container{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:25px;
+padding:20px;
+}
+
+.card{
+background:white;
+width:220px;
+padding:15px;
+border-radius:20px;
+text-align:center;
+text-decoration:none;
+color:black;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:15px;
+}
+
+footer{
+background:#4b0082;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<img src="images/logo.png" class="logo">
+<h1>🎵 متجر موسيقاتي 🎵</h1>
+<p>عالم الموسيقى الكامل</p>
+</header>
+
+
+<nav class="menu">
+
+<a href="offers.html" class="menu-item">
+<img src="images/hot deals _btn.png">
+<span id="menu1">🔥 العروضات</span>
+</a>
+
+<a href="services.html" class="menu-item">
+<img src="images/24.png">
+<span id="menu2">🛠 الخدمات</span>
+</a>
+
+<a href="contact.html" class="menu-item">
+<img src="images/call us _btn.png">
+<span id="menu3">📞 تواصل معنا</span>
+</a>
+
+<a href="settings.html" class="menu-item">
+<img src="images/22.png">
+<span id="menu4">⚙️ الاعدادات</span>
+</a>
+
+<a href="about.html" class="menu-item">
+<img src="images/our story.png">
+<span id="menu5">من نحن</span>
+</a>
+
+</nav>
+
+<h1 class="title">الفئات الموسيقية</h1>
+
+<div class="container">
+
+<a href="piano.html" class="card">
+<img src="images/piano.png">
+<h2 id="c1">البيانو 🎹</h2>
+</a>
+
+<a href="guitar.html" class="card">
+<img src="images/25.png">
+<h2 id="c2">القيتار 🎸</h2>
+</a>
+
+<a href="Amplifier.html" class="card">
+<img src="images/26.png">
+<h2 id="c3">مشغل الاسطوانات 💿</h2>
+</a>
+
+<a href="Gramophone.html" class="card">
+<img src="images/27.png">
+<h2 id="c4">مضخم الصوت 🔊</h2>
+</a>
+
+<a href="Clarinet.html" class="card">
+<img src="images/13.png">
+<h2 id="c5">اليراع 🎵</h2>
+</a>
+
+<a href="drums.html" class="card">
+<img src="images/19.png">
+<h2 id="c6">الطبول 🥁</h2>
+</a>
+
+</div>
+
+<footer>
+<p>مطورة الموقع : ايمان الدراغمة</p>
+</footer>
+
+
+
+<audio id="bgMusic" loop>
+    <source src="images/snd_music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+let musicState = localStorage.getItem("music") || "on";
+
+if(musicState === "on"){
+    document.addEventListener("click", function startMusic(){
+        music.play().catch(()=>{});
+    }, { once:true });
+}
+</script>
+
+
+<script>
+
+function applySettings(){
+
+let lang = localStorage.getItem("lang") || "ar";
+let theme = localStorage.getItem("theme") || "light";
+
+const t = {
+ar: {
+title: "🎵 متجر موسيقاتي 🎵",
+subtitle: "عالم الموسيقى الكامل",
+cats: "الفئات الموسيقية",
+footer: "مطورة الموقع : ايمان الدراغمة",
+
+menu1:"🔥 العروضات",
+menu2:"🛠 الخدمات",
+menu3:"📞 تواصل معنا",
+menu4:"⚙️ الاعدادات",
+menu5:"من نحن",
+
+c1:"البيانو 🎹",
+c2:"القيتار 🎸",
+c3:"مشغل الاسطوانات 💿",
+c4:"مضخم الصوت 🔊",
+c5:"اليراع 🎵",
+c6:"الطبول 🥁"
+},
+
+en: {
+title: "🎵 Mosiqati Store 🎵",
+subtitle: "The world of music",
+cats: "Music Categories",
+footer: "Web Developer : Eman Daragmeh",
+
+menu1:"🔥 Offers",
+menu2:"🛠 Services",
+menu3:"📞 Contact Us",
+menu4:"⚙️ Settings",
+menu5:"About Us",
+
+c1:"Piano 🎹",
+c2:"Guitar 🎸",
+c3:"Amplifier 💿",
+c4:"Gramophone 🔊",
+c5:"Clarinet 🎵",
+c6:"Drums 🥁"
+}
+};
+
+
+document.querySelector("header h1").innerText = t[lang].title;
+document.querySelector("header p").innerText = t[lang].subtitle;
+document.querySelector(".title").innerText = t[lang].cats;
+document.querySelector("footer p").innerText = t[lang].footer;
+
+document.getElementById("menu1").innerText = t[lang].menu1;
+document.getElementById("menu2").innerText = t[lang].menu2;
+document.getElementById("menu3").innerText = t[lang].menu3;
+document.getElementById("menu4").innerText = t[lang].menu4;
+document.getElementById("menu5").innerText = t[lang].menu5;
+
+document.getElementById("c1").innerText = t[lang].c1;
+document.getElementById("c2").innerText = t[lang].c2;
+document.getElementById("c3").innerText = t[lang].c3;
+document.getElementById("c4").innerText = t[lang].c4;
+document.getElementById("c5").innerText = t[lang].c5;
+document.getElementById("c6").innerText = t[lang].c6;
+
+
+document.documentElement.lang = lang;
+document.documentElement.dir = (lang === "en") ? "ltr" : "rtl";
+
+
+if(theme === "dark"){
+
+document.body.style.background = "#111";
+document.body.style.color = "white";
+
+document.querySelectorAll(".menu-item").forEach(el=>{
+el.style.background = "#222";
+el.style.color = "white";
+});
+
+document.querySelectorAll(".card").forEach(el=>{
+el.style.background = "#222";
+el.style.color = "white";
+});
+
+document.querySelector("header").style.background = "#222";
+document.querySelector("footer").style.background = "#222";
+
+}else{
+
+document.body.style.background = "#f5f5f5";
+document.body.style.color = "black";
+
+document.querySelectorAll(".menu-item").forEach(el=>{
+el.style.background = "white";
+el.style.color = "black";
+});
+
+document.querySelectorAll(".card").forEach(el=>{
+el.style.background = "white";
+el.style.color = "black";
+});
+
+document.querySelector("header").style.background = "#4b0082";
+document.querySelector("footer").style.background = "#4b0082";
+}
+
+}
+
+applySettings(); 
+
+</script>
+
+</body>
+</html>
